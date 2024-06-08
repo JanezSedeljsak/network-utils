@@ -50,17 +50,6 @@ def plot_deg(g):
     plt.show()
 
 
-def read_pajek(path):
-    nx_graph = nx.read_pajek(path)
-    mapping = {node: i for i, node in enumerate(nx_graph.nodes())}
-    g_ig = ig.Graph()
-    g_ig.add_vertices(len(mapping))
-    g_ig.add_edges((mapping[u], mapping[v]) for u, v in nx_graph.edges())
-    # g_ig.vs['label'] = list(mapping.keys())
-    g_ig.vs['name'] = list(mapping.keys())
-    return g_ig
-
-
 def approximate_avg_path_length(graph):
     total_path_length = 0
     num_pairs = 0
@@ -82,21 +71,6 @@ def approximate_avg_path_length(graph):
     
     return -1
 
-def read_ajd(file_path):
-    with open(file_path, 'r') as file:
-        for _ in range(4):
-            next(file) # skip line
-            
-        edges = [tuple(map(int, line.split())) for line in file]
-    return ig.Graph.TupleList(edges, directed=True)
-
-def erdos(n=300, p=0.2, directed=False):
-    random_graph = ig.Graph.Erdos_Renyi(n=n, p=p, directed=directed)
-    return random_graph
-
-def barabasi(n=300, m=2):
-    g = ig.Graph.Barabasi(n=n, m=m)
-    return g
 
 def calc_gamma(degs, k_min=5):
     degs = np.array(degs)
