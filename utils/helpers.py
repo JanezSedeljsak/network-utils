@@ -85,3 +85,10 @@ def get_pcurve(degs):
     pcurve_x = np.arange(min_, max_ + 1)
     pcurve_y = np.power(pcurve_x, -1 * gamma)
     return pcurve_x, pcurve_y
+
+
+def modularity(g: ig.Graph):
+    # uses louvian
+    community = g.community_multilevel()
+    modularity = g.modularity(community)
+    return modularity

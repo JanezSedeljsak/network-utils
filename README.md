@@ -165,6 +165,27 @@ For small-world networks, the concept of gamma is not typically used, as their d
 
 <h3>Community detection</h3>
 
+Most social networks and information networks contain communities. Many biological networks contain communities.Technological networks rarely contain communities. Random graphs lack community structure.
+
+- Removal of local bridge $\{i, j\}$ causes $d_{ij} > 2$
+- Removal of bridge $\{i, j\}$ causes $d_{ij} = \infty$
+- Embedded tie $\{i, j\}$ has $C_{ij} > 0$
+- A **clique** is a complete subgraph of some graph. This also includes k-plexes, k-cores, k-cliques, k-clubs, k-clans.
+- A **community** is a dense subgraph of a sparse network.
+- **Community detection** is essentially graph partitioning.
+
+<b>Modularity</b>
+
+Modularity is a measure in network science that quantifies the strength of division of a network into communities (also called modules or clusters). It was designed to measure the strength of partitioning of a network into communities, but it can also be viewed as a measure of the community structure found in the network.
+
+$$Q = \frac{1}{2m} \sum_{ij} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_i, c_j)$$
+
+- modularity $Q \gg 0$ also in random graphs
+- modularity $Q$ has resolution limit at $k_c \leq
+\sqrt{2m}$
+- modularity $Q$ lacks clear optimum in real networks
+
+
 **Louvain Method**: The Louvain method is a greedy optimization method that attempts to optimize the "modularity" of a partition of the network. Modularity is a scalar value between -1 and 1 that measures the density of links inside communities as compared to links between communities. The higher the modularity, the better the partition.
 
 **Girvan-Newman Algorithm**: This algorithm detects communities by progressively removing edges from the original graph. The algorithm removes the "most valuable" edge, traditionally the edge with the highest betweenness centrality, at each step. As the graph breaks down into pieces, the tightly knit community structure is exposed.
@@ -204,9 +225,9 @@ For small-world networks, the concept of gamma is not typically used, as their d
 - In disassortative mixing nodes linked to dissimilar others
 
 <b>Effects</b>
-— Degree mixing impacts connectivity and distances
-— Assortative mixing coexists with community structure
-— Mixing influences resilience  and controllability
+- Degree mixing impacts connectivity and distances
+- Assortative mixing coexists with community structure
+- Mixing influences resilience  and controllability
 
 The <b>assortativity degree</b> of a graph is a measure of how its nodes' degrees correlate with the degrees of their neighbors. It's a way to quantify the tendency of nodes to connect with other nodes that have similar degrees.
 
@@ -214,3 +235,22 @@ The <b>assortativity degree</b> of a graph is a measure of how its nodes' degree
 
 - A negative assortativity degree means that nodes tend to connect with nodes of dissimilar degree. This is known as disassortative mixing. For example, in an ecological network, this might mean that predators (which have few connections) tend to prey on species that are preyed upon by many other species (which have many connections)
 
+<h3>Time complexities</h3>
+
+| Measure/Algorithm                  | Time Complexity |
+|-----------------------------------|-----------------|
+| Clustering Coefficient            | O(n^2)          |
+| Average Distance                  | O(n^3)          |
+| Approximated Average Distance     | O(n log n)      |
+| Diameter                          | O(n^3)          |
+| Gamma (Transitivity)              | O(n^2)          |
+| Finding the Largest Connected Component | O(n + m)    |
+| Page Rank                         | O(n log n)      |
+| Betweenness Centrality            | O(n^3)          |
+| Louvain Community Detection       | O(n log n)      |
+| Infomap                           | O(n log n)      |
+| Girvan-Newman                     | O(n^3)          |
+| Breadth-First Search (BFS)        | O(n + m)        |
+| Depth-First Search (DFS)          | O(n + m)        |
+| Dijkstra's Algorithm              | O((n + m) log n)|
+| Bellman-Ford Algorithm            | O(n * m)        |
