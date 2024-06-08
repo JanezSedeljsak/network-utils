@@ -1,3 +1,59 @@
+<h3>Random facts</h3>
+
+- The density `ρ` of an undirected graph `G` is defined as:
+$$ρ = \frac{m}{{n \choose 2}} = \frac{2m}{n(n-1)} = \frac{\langle k \rangle}{n-1}$$
+
+- The density `ρ` of a directed graph `G` is defined as:
+$$ρ = \frac{m}{n(n-1)} = \frac{\langle k_{in} \rangle}{n-1} = \frac{\langle k_{out}\rangle}{n-1}$$
+
+- For an undirected graph `G`, the node clustering coefficient `Ci` of a node `i` is defined as:
+$$Ci = \frac{ti}{{ki \choose 2}}$$
+where `ti` is the number of linked neighbors or triangles of `i`. `Ci` is 0 for `ki ≤ 1`.
+
+- The average clustering coefficient `<C>` is defined as:
+
+$$\langle C \rangle = \frac{1}{n} \sum_{i} Ci$$
+
+- **Geodesic Path**: The shortest path between two nodes in a graph, with the smallest number of edges (unweighted) or smallest sum of edge weights (weighted).
+
+- **Distance**: The length of the geodesic path between two nodes, counted by edges (unweighted) or sum of edge weights (weighted).
+
+- **Graph Diameter**: The greatest distance between any pair of nodes, i.e., the length of the longest geodesic path.
+
+- **Average Distance**: The mean distance between all node pairs, calculated by summing all distances and dividing by the total number of pairs. It indicates the overall connectivity of the graph.
+
+
+<h3>Graph types in the core</h3>
+
+- **Directed Graphs**: In these graphs, edges have a direction. That is, the edge from node A to node B is not the same as the edge from node B to node A.
+
+- **Undirected Graphs**: In these graphs, edges do not have a direction. The edge between node A and node B is the same as the edge between node B and node A.
+
+- **Multipartite Graphs**: These are graphs whose vertices can be divided into multiple disjoint sets such that no two graph vertices within the same set are adjacent.
+
+- **Multigraphs**: These are graphs which permit multiple edges (also called parallel edges), i.e., edges that have the same end nodes. Thus, two vertices may be connected by more than one edge.
+
+- **Weighted Graphs**: These are graphs in which each edge is assigned a numerical value or weight.
+
+- **Trees**: These are a type of graph that has no cycles and is completely connected.
+
+- **Planar Graphs**: These are graphs that can be embedded in the plane, i.e., they can be drawn on the plane in such a way that its edges intersect only at their endpoints.
+
+- **Hypergraphs**: In these graphs, an edge can connect any number of nodes, not just two.
+
+
+<h3>Types of networks</h3>
+
+- **Social Networks**: Nodes represent people or animals, and links represent interactions. Examples include Facebook, offline and online social networks, affiliation networks, and author/actor collaboration networks.
+
+- **Information Networks**: Nodes represent information sources, and links represent information flow. Examples include the Web, Twitter, citation networks, communication networks, and peer-to-peer networks.
+
+- **Technological Networks**: These are human-made infrastructures with technological constraints. Examples include the Internet, telephone networks, transportation networks, power grids, and software networks.
+
+- **Biological Networks**: These represent interactions between genes, cells, neurons in living beings. Examples include gene regulatory networks, metabolic networks, protein interaction networks, and neural networks.
+
+- Other types of networks include ecological networks, lexical networks, financial networks, sports networks, etc.
+
 <h3>Graph representations</h3>
 
 **Adjacency Matrix**: This is a two-dimensional matrix where the cell at the intersection of row i and column j indicates the presence (and possibly the weight) of an edge between vertices i and j.
@@ -21,9 +77,18 @@ Strengths:
 
 <h3>Random graphs</h3>
 
-**Erdos-Renyi Model**: This is one of the simplest random graph generation models. In the G(n, p) model, a graph is constructed by connecting nodes randomly. Each edge is included in the graph with probability p independent from every other edge.
+**Erdos-Renyi Model**: This is one of the simplest random graph generation models. In the G(n, p) model, a graph is constructed by connecting nodes randomly. Each edge is included in the graph with probability p independent from every other edge. A large "giant" component emarges when $\langle k \rangle = 1$. Random graphs substantially underestimate $\langle C \rangle$.
 
-**Watts-Strogatz Model**: This model generates small-world networks which exhibit properties of high clustering coefficient and small shortest path length. It starts with a regular lattice where each node is connected to k nearest neighbors and then rewires the edges randomly with a probability p.
+- **Subcritical**: $n_S \sim \ln n$
+- **Critical Point**: $n_S \sim n^{2/3}$
+- **Supercritical**: $n_S \sim n \frac{\langle k \rangle -1}{n-1}$
+- **Fully Connected**: $n_S \approx n$
+
+**Watts-Strogatz Model**: This model generates small-world networks which exhibit properties of high clustering coefficient and small shortest path length. It starts with a regular lattice where each node is connected to k nearest neighbors and then rewires the edges randomly with a probability p. Friendship paradox: $\langle neighbor(k) \rangle > \langle k \rangle$. 
+
+- **Rand. net. Poisson dist.**: $p_k = \frac{{\langle k \rangle^k e^{-\langle k \rangle}}}{{k!}}$
+- **Real net. Power-law Degree dist.**: $p_k \sim k^{-\gamma}$
+- **Probability of a link**: $p_{ij} = (ki \times kj) / 2m$
 
 **Stochastic Block Model**: This model generates graphs with community structure. Nodes are divided into groups or "blocks", and the probability of an edge existing between two nodes depends on the blocks that those nodes belong to.
 
