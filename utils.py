@@ -11,28 +11,37 @@ def info(graph, approx_len=False):
     print(f"{'Clustering Coefficient:'.ljust(25)} {graph.transitivity_avglocal_undirected(mode='zero')}")
     print(f"{'Number of Vertices:'.ljust(25)} {graph.vcount()}")
     print(f"{'Number of Edges:'.ljust(25)} {graph.ecount()}")
+    print(f"{'Gamma:'.ljust(25)} {calc_gamma(graph.degree())}")
+    print(f"{'Number of Components:'.ljust(25)} {len(graph.decompose(mode='strong'))}")
+    lcc = (max(c.vcount() for c in graph.decompose(mode='strong')) / graph.vcount())
+    print(f"{'LCC:'.ljust(25)} {lcc}")
     if approx_len:
         print(f"{'Approx. Avg. Path Length:'.ljust(25)} {approximate_avg_path_length(graph)}")
     else:
         print(f"{'Avg. Path Length:'.ljust(25)} {graph.average_path_length()}")
 
 def components(graph):
-    return graph.decompose(mode='strong')
+    return graph.decompose(mode="strong")
 
-def plot_degree_distribution(graph):
-    degrees = graph.degree()
-    values, counts = np.unique(degrees, return_counts=True)
+def plot_deg(g):
+    deg_dist = np.array(list(g.degree_distribution().bins()))
+    deg_dist = deg_dist[(deg_dist[:, 2] > 0)]
+    g_px, g_py = get_pcurve(g.degree())
+
+    g_pk = deg_dist[:, 2] / g.vcount()
+    g_k = deg_dist[:, 0]
 
     plt.figure(figsize=(12, 6))
 
     plt.subplot(1, 2, 1)
-    plt.bar(values, counts, width=0.80, color='b')
+    plt.bar(g_k, g_pk, width=0.80, color='b')
     plt.title('Degree Distribution')
     plt.xlabel('Degree')
     plt.ylabel('Count')
 
     plt.subplot(1, 2, 2)
-    plt.loglog(values, counts, 'b-', marker='o')
+    plt.loglog(g_px, g_py, 'b--')
+    plt.loglog(g_k, g_pk, 'bo')
     plt.title('Log-Log Degree Distribution')
     plt.xlabel('Degree')
     plt.ylabel('Count')
@@ -88,3 +97,17 @@ def erdos(n=300, p=0.2, directed=False):
 def barabasi(n=300, m=2):
     g = ig.Graph.Barabasi(n=n, m=m)
     return g
+
+def calc_gamma(degs, k_min=5):
+    degs = np.array(degs)
+    Ks = degs[degs >= k_min]
+    n, itt_divisor = Ks.shape[0], k_min - .5
+    vec_sum = np.sum(np.log(Ks / itt_divisor))
+    return 1 + n * (vec_sum ** -1)
+
+def get_pcurve(degs):
+    gamma = calc_gamma(degs)
+    min_, max_ = min(degs), max(degs)
+    pcurve_x = np.arange(min_, max_ + 1)
+    pcurve_y = np.power(pcurve_x, -1 * gamma)
+    return pcurve_x, pcurve_y
