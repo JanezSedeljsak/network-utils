@@ -108,8 +108,34 @@ def get_edges(graph):
     return graph.es
 
 def get_node_names(graph):
-    assert 'name' in graph.vs, "Graph doesn't have names defined"
     return graph.vs['name']
 
 def get_node_indices(graph):
     return graph.vs.indices
+
+def node_degree(graph, node_index):
+    return graph.degree(node_index)
+
+def get_degrees(graph):
+    return graph.degree()
+
+def degree_distrib(graph):
+    degrees = graph.degree()
+    return {i: degrees.count(i) for i in set(degrees)}
+
+def nodes_are_connected(graph, node_index1, node_index2):
+    return graph.are_adjacent(node_index1, node_index2)
+
+def add_node(graph, name=None):
+    graph.add_vertex(name=name)
+
+def remove_node(graph, node_index):
+    graph.delete_vertices(node_index)
+
+def connect_nodes(graph, node_index1, node_index2):
+    graph.add_edge(node_index1, node_index2)
+
+def disconnect_nodes(graph, node_index1, node_index2):
+    edge_id = graph.get_eid(node_index1, node_index2, error=False)
+    if edge_id != -1:
+        graph.delete_edges(edge_id)
