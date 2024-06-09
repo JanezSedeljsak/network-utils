@@ -58,7 +58,9 @@ $$\langle C \rangle = \frac{1}{n} \sum_{i} Ci$$
 
 - **Complete graphs**: Graph where every node is directly connected to every other node. We can calculate the number of edges from the number of nodes as $\mathbf{m = \frac{n(n-1)}{2}}$.
 
-- **Isomorphic graphs**: In graph theory, two graphs are said to be isomorphic if there is a one-to-one correspondence between their vertices and edges that preserves the connectivity of the graphs. In other words, two graphs are isomorphic if they have the same structure, but possibly different labels and/or different arrangements in the plane. (There has to be bijective function $f$ from the verticies of $G1$ to $G2$)
+- **Isomorphic graphs**: In graph theory, two graphs are said to be isomorphic if there is a one-to-one correspondence between their vertices and edges that preserves the connectivity of the graphs. In other words, two graphs are isomorphic if they have the same structure, but possibly different labels and/or different arrangements in the plane. (There has to be bijective function $f$ from the verticies of $G1$ to $G2$).
+
+- **Cliques**: A clique in a graph is a subset of vertices such that every two distinct vertices in the clique are adjacent. In other words, a clique is a complete subgraph of the original graph. This means that every node in the clique is connected to every other node in the clique.
 
 
 <h3>Types of networks</h3>
@@ -262,16 +264,74 @@ The range of NVI is [0, log(n)]. A value of 0 indicates that the two clusterings
 
 <h3>Node importance</h3>
 
+Centrality measures for (un)directed networks
+- clustering coefficients
+- geodesic-based measures
+- spectral analysis measures
+- fragment-based measures
+
+<hr/>
+
 1. **Degree Centrality**: This is the simplest measure of node centrality. It is calculated as the number of edges connected to a node. In directed networks, you can further distinguish between in-degree and out-degree centrality.
+$$C_D(v) = \frac{\text{deg}(v)}{n-1}$$
 
 2. **Closeness Centrality**: This measure calculates the average length of the shortest path from a node to all other nodes in the network. Nodes with lower average shortest paths have higher closeness centrality.
+$$C_C(i) = \frac{1}{\frac{1}{n-1} \sum_{j \neq i} d_{ij}}$$
+$d_{ij}$ is the distance between node i and j.
 
-3. **Betweenness Centrality**: This measure calculates the number of shortest paths from all nodes to all others that pass through a particular node. Nodes that occur on many shortest paths have higher betweenness centrality.
+
+3. **Betweenness Centrality**: This measure calculates the number of shortest paths from all nodes to all others that pass through a particular node. Nodes that occur on many shortest paths have higher betweenness centrality. The sum is the fraction of shortest paths that go through the current node.
+
+$$C_B(i) = \frac{1}{n^2} \sum_{s \neq t} \frac{g_{st}^{\lq i}}{g_{st}}$$
 
 4. **Eigenvector Centrality**: This measure assigns relative scores to all nodes in the network based on the concept that connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes.
+$$e_i = \frac{1}{\lambda} \sum_{j} A_{ij} e_j$$
 
 5. **PageRank**: This is a variant of Eigenvector Centrality, used by Google to rank websites in their search engine results. It measures the importance of each node within the network.
+$$p_i = \alpha + \sum_j (A_{ij} \frac{p_j}{k_j^{out}}) + \beta_i$$,
+for convenience $\beta_i = \frac{1 - \alpha}{n}$ (teleportation probability) and $\alpha = 0.85$ (damping factor). $k_j^{out}$ is the out-degree of node $j$, which is the number of links going out from the node. $p_j$ is the <b>PageRank</b> of node $j$. The nature of PageRank is thus recursive and is calculate iteratively slowly adjusting the PageRank of every node.
 
+6. **Katz Centrality**: This measure assigns relative scores to all nodes in the network based on the sum of the number of walks of different lengths, with shorter walks contributing more than longer ones. It is similar to Eigenvector Centrality but it also considers the shorter paths.
+$$k_i = \alpha \sum_{j} A_{ij} k_j + \beta$$
+where:
+    - $k_i$ is the Katz centrality of node $i$.
+    - $\alpha$ is a factor that determines the influence of longer walks (it should be less than the reciprocal of the largest eigenvalue of the adjacency matrix for the series to converge) $a \lt \lambda_1^{-1}$ (leading eigenvalue of $A$).
+    - $A_{ij}$ is the element at the $i$-th row and $j$-th column of the adjacency matrix $A$.
+    - $k_j$ is the Katz centrality of node $j$.
+    - $\beta$ is a constant representing an initial centrality ($\beta = 1).
+
+<hr/>
+
+7. **Clustering Coefficient (C)**: This measure gives an indication of the degree to which nodes in a graph tend to cluster together. Evidence suggests that in most real-world networks, and in particular social networks, nodes tend to create tightly knit groups characterized by a relatively high density of ties.
+
+   $$C_i = \frac{2t_i}{k_i(k_i-1)}$$
+
+   where:
+   - $C_i$ is the clustering coefficient of node $i$.
+   - $t_i$ is the number of triangles connected to node $i$.
+   - $k_i$ is the degree of node $i$.
+   - $C_i = 0$ for $k_i \leq 1$.
+
+8. **ω-corrected Clustering Coefficient (Cω)**: This is a variant of the clustering coefficient that takes into account the maximum possible number of triangles with respect to the degree distribution.
+
+   $$C_{\omega i} = \frac{t_i}{\omega_i}$$
+
+   where:
+   - $C_{\omega i}$ is the ω-corrected clustering coefficient of node $i$.
+   - $t_i$ is the number of triangles connected to node $i$.
+   - $\omega_i$ is the maximum possible number of triangles with respect to the degree distribution.
+   - $C_{\omega i} = 0$ for $\omega_i = 0$.
+
+9. **µ-corrected Clustering Coefficient (Cµ)**: This is another variant of the clustering coefficient that takes into account the maximum number of triangles over links.
+
+   $$C_{\mu i} = \frac{2t_i}{k_i\mu}$$
+
+   where:
+   - $C_{\mu i}$ is the µ-corrected clustering coefficient of node $i$.
+   - $t_i$ is the number of triangles connected to node $i$.
+   - $k_i$ is the degree of node $i$.
+   - $\mu$ is the maximum number of triangles over links.
+   - $C_{\mu i} = 0$ for $k_i = 0$. 
 
 <h3>Edge importance</h3>
 
