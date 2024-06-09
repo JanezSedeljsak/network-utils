@@ -92,3 +92,14 @@ def modularity(g: ig.Graph):
     community = g.community_multilevel()
     modularity = g.modularity(community)
     return modularity
+
+def calc_core_periphery_coefficient(g):
+    A = np.array(g.get_adjacency().data)
+    D = np.diag(A.sum(axis=1))
+    L = D - A
+    eigvals, eigvecs = np.linalg.eig(L)
+    index = np.argsort(eigvals)[1]
+    coreness = eigvecs[:, index]
+    coreness = (coreness - np.min(coreness)) / (np.max(coreness) - np.min(coreness))
+    core_periphery_coefficient = np.mean(coreness)
+    return core_periphery_coefficient

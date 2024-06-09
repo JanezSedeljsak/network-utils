@@ -1,3 +1,11 @@
+<h3>Some terminology</h3>
+
+- **Degree**: The degree of a vertex is the number of edges connected to it. In directed graphs, we distinguish between in-degree (number of incoming edges) and out-degree (number of outgoing edges).
+- **Pendant Vertex**: A pendant vertex is a vertex that has a degree of 1. This means it is connected to the graph by a single edge.
+- **Isolated Vertex**: An isolated vertex is a vertex with a degree of 0, meaning it has no edges connecting it to any other vertex in the graph.
+- **Adjacent Vertices**: Two vertices are said to be adjacent if they are both endpoints of the same edge.
+- **Incident Edges**: An edge is said to be incident to a vertex if the vertex is one of the endpoints of the edge.
+
 <h3>Random facts</h3>
 
 - The density `ρ` of an undirected graph `G` is defined as:
@@ -183,8 +191,21 @@ $$Q = \frac{1}{2m} \sum_{ij} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c
 - modularity $Q \gg 0$ also in random graphs
 - modularity $Q$ has resolution limit at $k_c \leq
 \sqrt{2m}$
-- modularity $Q$ lacks clear optimum in real networks
+- modularity $Q$ lacks clear optimum in real networks.
 
+<b>Partitioning bisection</b>
+
+Partitioning bisection is a method used in graph theory to divide a graph into two subgraphs (or partitions) of equal size. The goal is to minimize the number of edges that are cut, i.e., the number of edges that have one endpoint in each partition.
+
+This problem is known to be NP-hard, meaning that there is no known efficient algorithm to solve it exactly for all graphs. However, there are several heuristic algorithms that can find good (but not necessarily optimal) solutions in a reasonable amount of time. These include the Kernighan–Lin algorithm, the Fiduccia-Mattheyses algorithm, and spectral partitioning methods.
+
+**Kernighan-Lin**: This is a heuristic algorithm used for partitioning a graph into two equal-sized sets while minimizing the cut size (the number of edges between the two sets). It works by iteratively swapping pairs of nodes to improve the cut size. It's a local search method, meaning it starts with an initial solution and tries to improve it through local changes.
+
+**Fiedler graph bisection**: This is a spectral method for graph partitioning. It uses the eigenvector corresponding to the second smallest eigenvalue of the Laplacian matrix of the graph (known as the Fiedler vector) to partition the graph. Nodes are sorted based on their values in the Fiedler vector, and the graph is split at the point that minimizes the cut size. This method can reveal global properties of the graph and is often used as a preprocessing step for other algorithms.
+
+**Standard equivalence blockmodeling**: This is a method used in social network analysis to identify roles and positions in a network. It works by partitioning the nodes into blocks such that nodes in the same block are structurally equivalent, meaning they have identical patterns of connections to other nodes. The goal is to simplify the network into a blockmodel, which is a smaller graph that preserves the essential structure of the original network. This method is more focused on the structure of the network and the roles of nodes, rather than simply dividing the network into parts.
+
+<hr/>
 
 **Louvain Method**: The Louvain method is a greedy optimization method that attempts to optimize the "modularity" of a partition of the network. Modularity is a scalar value between -1 and 1 that measures the density of links inside communities as compared to links between communities. The higher the modularity, the better the partition.
 
@@ -193,6 +214,35 @@ $$Q = \frac{1}{2m} \sum_{ij} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c
 **Infomap**: Infomap is based on the idea that information flows through a network and often gets stuck in densely connected parts of the network, i.e., communities. The algorithm uses the probability flow of random walks as a proxy for information flows in the real system and decomposes the network into modules that minimize the expected description length of a random walker's movements on the network.
 
 **Label Propagation Algorithm (LPA)**: The algorithm doesn’t require a priori information about the number of clusters and can unveil hierarchies of communities, where each node is assigned a unique label and at every step each node adopts the label that most of its neighbors currently have. In this iterative procedure, densely connected groups of nodes form a consensus on a unique label to form communities.
+
+**Ravasz Hierarchical Clustering**: This is a method used for detecting hierarchical structure in networks. It's based on the idea of "hierarchical modularity", a property of many complex networks where nodes form tightly knit groups that are hierarchically organized. The method works by iteratively grouping nodes into modules based on their connections, and then treating each module as a single node in the next level of the hierarchy. This process is repeated until all nodes are grouped into a single module at the top of the hierarchy. The result is a dendrogram that shows the hierarchical organization of the nodes.
+
+**Leiden Modularity Optimization**: This is a method used for community detection in networks. It's an improvement over the Louvain method, which is a popular method for optimizing modularity. The Leiden method also optimizes modularity, but it includes an additional refinement phase that improves the quality of the detected communities. The method works by iteratively assigning nodes to communities in a way that maximizes the gain in modularity, and then refining the communities to ensure that each node is in the community where it contributes most to modularity. The process is repeated until no further improvement can be made. The Leiden method is known for its high quality results and its ability to detect communities in large networks.
+
+<hr/>
+
+<b>Measures</b>
+
+**Normalized Mutual Information (NMI)**: This is a measure used to compare the similarity of two clusterings. The formula for NMI is:
+
+$$NMI(X, Y) = \frac{2 * I(X; Y)}{H(X) + H(Y)}$$
+
+where I(X; Y) is the mutual information between X and Y, and H(X) and H(Y) are the entropies of X and Y, respectively. The range of NMI is [0, 1]. A value of 0 indicates that the two clusterings are completely independent, while a value of 1 indicates that they are identical. Therefore, a larger value is better.
+
+**Normalized Variation of Information (NVI)**: 
+The Normalized Variation of Information (NVI) is a measure of the dissimilarity between two clusterings. It is defined as the Variation of Information (VI) between the two clusterings, divided by the logarithm of the total number of elements (n).
+
+The Variation of Information is defined as the sum of the conditional entropies of the two clusterings, which measures the amount of information lost when changing from one clustering to the other.
+
+$$NVI(C, D) = \frac{VI(C, D)}{log(n)} = \frac{H(C|D) + H(D|C)}{log(n)}$$
+
+- $C$ and $D$ are the two clusterings
+- $VI(C, D)$ is the Variation of Information between $C$ and $D$
+- $H(C|D)$ is the conditional entropy of $C$ given $D$
+- $H(D|C)$ is the conditional entropy of $D$ given $C$
+- $log(n)$ is the logarithm of the total number of elements
+
+The range of NVI is [0, log(n)]. A value of 0 indicates that the two clusterings are identical, while a value of log(n) indicates that they are completely dissimilar. Therefore, a smaller value is better.
 
 <h3>Node importance</h3>
 
@@ -234,6 +284,43 @@ The <b>assortativity degree</b> of a graph is a measure of how its nodes' degree
 - A positive assortativity degree means that nodes tend to connect with other nodes of similar degree. This is known as assortative mixing. For example, in a social network, this might mean that people with many friends tend to be friends with other people who have many friends.
 
 - A negative assortativity degree means that nodes tend to connect with nodes of dissimilar degree. This is known as disassortative mixing. For example, in an ecological network, this might mean that predators (which have few connections) tend to prey on species that are preyed upon by many other species (which have many connections)
+
+
+<h3>Block modeling</h3>
+
+Blockmodeling is a method used in network analysis to simplify the structure of a network by grouping together nodes that have similar connection patterns. The goal is to represent the network as a smaller graph, known as a blockmodel, which preserves the essential structure of the original network.
+
+$$r = \frac{\frac{1}{m}\sum_{ij}(A_{ij}k_{i}k_{j}) - \left[\frac{1}{2m}\sum_{ij}(A_{ij}(k_{i}+k_{j}))\right]^2}{\frac{1}{2m}\sum_{ij}(A_{ij}(k_{i}^2+k_{j}^2)) - \left[\frac{1}{2m}\sum_{ij}(A_{ij}(k_{i}+k_{j}))\right]^2}$$
+
+Here are various models used for generating or representing networks:
+
+- **Random Graph Model G(n, m)**: This model generates a random graph with `n` nodes and `m` links. Each pair of nodes is connected by an edge with equal probability, independent of the other edges.
+
+- **Configuration Model G({k})**: This model generates a random graph with a given degree sequence `{k}`. Each node `i` has `k_i` stubs (half-edges), and pairs of stubs are randomly connected to form edges.
+
+- **Exponential p\*-model** $\mathbf{G(n, {\langle x \rangle})}$: This model generates a random graph with `n` nodes and expected values $\langle xi \rangle$. The probability of each possible graph is proportional to the exponential of a graph statistic (such as the number of edges or triangles) multiplied by a parameter.
+
+- **Stochastic Block Model G({C})**: This model generates a random graph with node clusters `{C}`. Each node belongs to one cluster, and edges between nodes are generated with probabilities that depend on their clusters.
+
+- **Hierarchical Model G(H)**: This model generates a random graph with a given node hierarchy `H`. The hierarchy is a tree structure, and edges between nodes are more likely if their lowest common ancestor in the hierarchy is closer to them.
+
+
+<h3>Core preiphery</h3>
+
+A core-periphery structure in network analysis divides the network into a densely connected "core" and a less connected "periphery". The core nodes have many interactions, while periphery nodes are less central and typically connect to the core. This structure, often seen in social networks, suggests an underlying structure rather than randomness.
+
+- <b>Core/periphery</b> nodes have <b>higher/lower</b> degrees `k`
+- <b>Core/periphery</b> nodes are on <b>shorter/longer</b> distances
+- <b>Core/periphery</b> nodes have <b>higher/lower</b> clustering `C`
+
+<hr/>
+
+- k-cores are subgraphs of nodes with $\geq k$ neighbors <small>Remove nodes with degree < k until no such node remains</small>
+- k-shells are nodes of k-cores that are not in k + 1-cores
+- k-cores are nested while k-shells form decomposition
+- Holme’s k∗-core maximizes closeness centrality $l^{(-1)}$
+
+The core-periphery coefficient quantifies a network's core-periphery structure, where the "core" nodes are densely connected and "periphery" nodes are less so. It's calculated by assigning each node a "coreness" score (often between 0 and 1), then aggregating these scores. Higher coefficients indicate a stronger core-periphery structure. The specifics can vary based on the network and context.
 
 <h3>Time complexities</h3>
 
