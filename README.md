@@ -56,6 +56,10 @@ $$\langle C \rangle = \frac{1}{n} \sum_{i} Ci$$
 
 - **Hypergraphs**: In these graphs, an edge can connect any number of nodes, not just two.
 
+- **Complete graphs**: Graph where every node is directly connected to every other node. We can calculate the number of edges from the number of nodes as $\mathbf{m = \frac{n(n-1)}{2}}$.
+
+- **Isomorphic graphs**: In graph theory, two graphs are said to be isomorphic if there is a one-to-one correspondence between their vertices and edges that preserves the connectivity of the graphs. In other words, two graphs are isomorphic if they have the same structure, but possibly different labels and/or different arrangements in the plane. (There has to be bijective function $f$ from the verticies of $G1$ to $G2$)
+
 
 <h3>Types of networks</h3>
 
@@ -185,6 +189,18 @@ Most social networks and information networks contain communities. Many biologic
 <b>Modularity</b>
 
 Modularity is a measure in network science that quantifies the strength of division of a network into communities (also called modules or clusters). It was designed to measure the strength of partitioning of a network into communities, but it can also be viewed as a measure of the community structure found in the network.
+
+<hr/>
+
+Modularity is a measure that quantifies the strength of division in a network into communities or clusters. It is based on a null model represented by the configuration model, a type of random graph that maintains the same degree distribution as the original network. This model is used to simulate a scenario where the network's edges are distributed randomly, while still preserving the degree of each node.
+
+If a different graph model is used as the null model, the interpretation of the modularity measure would be altered. The modularity would then represent the degree to which the actual network deviates from this alternative null model in terms of its community structure.
+
+For instance, if the null model is a lattice graph, a high modularity would suggest that the actual network has a more pronounced community structure than a lattice. Conversely, if the null model is a scale-free network, a high modularity would imply that the actual network exhibits a stronger community structure than a scale-free network.
+
+In essence, the modularity measure is based on a comparison between the actual network and a null model, which is typically represented by the configuration model. A high modularity indicates that the network's community structure is stronger than what would be expected if the edges were distributed randomly while maintaining the degree of each node.
+
+<hr/>
 
 $$Q = \frac{1}{2m} \sum_{ij} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_i, c_j)$$
 
@@ -322,7 +338,40 @@ A core-periphery structure in network analysis divides the network into a densel
 
 The core-periphery coefficient quantifies a network's core-periphery structure, where the "core" nodes are densely connected and "periphery" nodes are less so. It's calculated by assigning each node a "coreness" score (often between 0 and 1), then aggregating these scores. Higher coefficients indicate a stronger core-periphery structure. The specifics can vary based on the network and context.
 
+<h3>Subgraphs / fragments</h3>
+
+Small graphs are building blocks of networks and characterize local network structure.
+
+- <b>Fragments</b>: Fragments are connected subgraphs of a larger network. They are a subset of nodes and the edges between them that form a connected structure. For example, in a social network, a fragment could represent a group of friends who are all connected to each other.
+
+
+- <b>Motifs</b>: Motifs are recurring and statistically significant patterns of non-induced subgraphs in a network. They represent common local connection patterns between nodes. For instance, in a biological network, a motif might represent a common pattern of interactions between proteins. It has a very low probability of appearing in random graph ($ \lt 0.01$). 
+\
+Motif significance has a normal distribution $N(0, 1)$. $n_i$ is the number of motifs i in a real network. And $\lq n_i$ - the number of motifs in a random network (with variance $\lq \sigma_{i}$).
+$$Z_i = \frac{n_i - \langle \lq n_i \rangle }{\lq \sigma_{i}} \\
+n_i - \langle \lq n_i \rangle \gt 0.1 \times \langle \lq n_i \rangle
+$$
+We also have have motif significance profile $\mathbf{SP}$, which is defined as $SP_i = Z_i / \sqrt{\sum_i {Z_i}^2}$. 
+\
+And there is also an abundance/ratio profile, defined as $A_i$ is the abundance of motif $i$ in a real network. $RP_i = A_i / \sqrt{\sum_i {A_i}^2}$, where $A_i$ is $(n_i - \langle \lq n_i \rangle) / (n_i + \langle \lq n_i \rangle + \epsilon_i)$
+ 
+
+- <b>Graphlets</b>: Graphlets are specific induced subgraphs, meaning they include all the edges that exist between the selected nodes in the larger network. They are often used in network analysis to capture and compare local network topology. For example, in a citation network, a graphlet could represent a specific pattern of citations between a group of papers.
+\
+In other words, if you select a set of nodes from a graph to form a graphlet, you must also include any edge from the original graph that connects two nodes in this set. This can result in a variety of different structures, depending on the connections between the selected nodes in the original graph.
+\
+Relative graphlet frequency F is defined as $F_i = n_i / \sum_i n_i$, this measures the number of occurances of a specific graphlet compared to other types.
+\
+Graphlets are small subgraphs of a larger network, and orbits are essentially the roles that nodes can play within a graphlet. For example, in a triangle graphlet, each node has the same role, so there is only one orbit. But in a star-shaped graphlet with four nodes, the center node has a different role than the three peripheral nodes, so there are two orbits. The i-th orbit graphlet degree distribution gives the degree distribution for node.
+    - $p_k^i$ is graphlet degree distribution for i-th orbit
+    - $p_k^{\lq i}$ is a scaled graphlet degree distribution for i-th orbit, which is defined as  $p_k^{\lq i} = p_k^i / k$.
+    - i-th orbit graphlet agreement $A_i$ is defined as $$A_i = 1 - \sqrt{\frac{1}{2} \sum_k (\log q_k^{\lq i} - \log p_k^{\lq i})^2}$$, where p and q are two networks.
+    -  arithmetic/geometric graphlet agreeement $A$ is defind as $$A = \frac{1}{73} \sum_i A_i \\ 
+        A = (\prod_i A_i)^{\frac{1}{73}}
+    $$
 <h3>Time complexities</h3>
+
+$m$ are edges and $n$ are nodes
 
 | Measure/Algorithm                  | Time Complexity |
 |-----------------------------------|-----------------|
@@ -341,3 +390,6 @@ The core-periphery coefficient quantifies a network's core-periphery structure, 
 | Depth-First Search (DFS)          | O(n + m)        |
 | Dijkstra's Algorithm              | O((n + m) log n)|
 | Bellman-Ford Algorithm            | O(n * m)        |
+| Kruskal's Algorithm               | O(m log m)      |
+
+

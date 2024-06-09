@@ -103,3 +103,13 @@ def calc_core_periphery_coefficient(g):
     coreness = (coreness - np.min(coreness)) / (np.max(coreness) - np.min(coreness))
     core_periphery_coefficient = np.mean(coreness)
     return core_periphery_coefficient
+
+def get_edges(graph):
+    return graph.es
+
+def get_node_names(graph):
+    assert 'name' in graph.vs, "Graph doesn't have names defined"
+    return graph.vs['name']
+
+def get_node_indices(graph):
+    return graph.vs.indices
