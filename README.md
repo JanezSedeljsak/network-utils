@@ -37,6 +37,13 @@ $$\langle C \rangle = \frac{1}{n} \sum_{i} Ci$$
     - Scale-free networks $\gamma = 3$ are "small-world" as $\langle d \rangle \sim \frac{\ln n}{\ln \ln n}$
     - $G(n, c)$ scale-free model is not small-world as $\langle C \rangle \approx \frac{(\ln n)^2}{n}$
 
+- **Strongly Connected Components**: A strongly connected component of a directed graph is a subgraph where there is a directed path from any node to any other node. In other words, you can get from any node in the subgraph to any other node in the subgraph by following the directed edges.
+
+- **Weakly Connected Components**: A weakly connected component of a directed graph is a subgraph where there is a path from any node to any other node if we ignore the direction of the edges. In other words, if you replace all directed edges with undirected edges, all nodes in the subgraph are connected.
+
+- **High modularity and low clustering coefficient** (e.g., a network of star-shaped communities)
+
+- **Low modularity and high clustering coefficient** (e.g., a network with a lot of triangles but no larger communities).
 
 <h3>Graph types in the core</h3>
 
@@ -282,7 +289,7 @@ The range of NVI is [0, log(n)]. A value of 0 indicates that the two clusterings
 
 Centrality measures for (un)directed networks
 - clustering coefficients
-- geodesic-based measures
+- geodesic-based measures (closeness centrality, betweenness centrality)
 - spectral analysis measures
 - fragment-based measures
 
