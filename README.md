@@ -447,13 +447,28 @@ Here are various models used for generating or representing networks:
 
 - **Random Graph Model G(n, m)**: This model generates a random graph with `n` nodes and `m` links. Each pair of nodes is connected by an edge with equal probability, independent of the other edges.
 
+  1. Start with n isolated nodes.
+  2. Randomly select two nodes and add an edge between them, repeat this m times.
+
 - **Configuration Model G({k})**: This model generates a random graph with a given degree sequence `{k}`. Each node `i` has `k_i` stubs (half-edges), and pairs of stubs are randomly connected to form edges.
+  1. Start with n isolated nodes, where n is the length of the degree sequence {k}.
+  2. Assign to each node i a number of "stubs" (half-edges) equal to k_i.
+  3. Randomly select two stubs and connect them to form an edge, repeat until all stubs are connected.
 
 - **Exponential p\*-model** $\mathbf{G(n, {\langle x \rangle})}$: This model generates a random graph with `n` nodes and expected values $\langle xi \rangle$. The probability of each possible graph is proportional to the exponential of a graph statistic (such as the number of edges or triangles) multiplied by a parameter.
+  1. Start with n isolated nodes.
+  2. For each possible edge, calculate the probability of its existence based on the exponential of a graph statistic multiplied by a parameter.
+  3. Add the edge to the graph with the calculated probability.
 
 - **Stochastic Block Model G({C})**: This model generates a random graph with node clusters `{C}`. Each node belongs to one cluster, and edges between nodes are generated with probabilities that depend on their clusters.
+  1. Partition the set of n nodes into clusters {C}.
+  2. For each pair of nodes, calculate the probability of an edge between them based on their cluster memberships.
+  3. Add the edge to the graph with the calculated probability.
 
 - **Hierarchical Model G(H)**: This model generates a random graph with a given node hierarchy `H`. The hierarchy is a tree structure, and edges between nodes are more likely if their lowest common ancestor in the hierarchy is closer to them.
+  1. Assign each of the n nodes to a position in the hierarchy H.
+  2. For each pair of nodes, calculate the probability of an edge between them based on their positions in the hierarchy.
+  3. Add the edge to the graph with the calculated probability.
 
 
 <h3>Core preiphery</h3>
