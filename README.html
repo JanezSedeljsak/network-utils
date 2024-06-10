@@ -666,18 +666,42 @@ where</p>
 <ul>
 <li>
 <p><strong>Random Graph Model G(n, m)</strong>: This model generates a random graph with <code>n</code> nodes and <code>m</code> links. Each pair of nodes is connected by an edge with equal probability, independent of the other edges.</p>
+<ol>
+<li>Start with n isolated nodes.</li>
+<li>Randomly select two nodes and add an edge between them, repeat this m times.</li>
+</ol>
 </li>
 <li>
 <p><strong>Configuration Model G({k})</strong>: This model generates a random graph with a given degree sequence <code>{k}</code>. Each node <code>i</code> has <code>k_i</code> stubs (half-edges), and pairs of stubs are randomly connected to form edges.</p>
+<ol>
+<li>Start with n isolated nodes, where n is the length of the degree sequence {k}.</li>
+<li>Assign to each node i a number of "stubs" (half-edges) equal to k_i.</li>
+<li>Randomly select two stubs and connect them to form an edge, repeat until all stubs are connected.</li>
+</ol>
 </li>
 <li>
 <p><strong>Exponential p*-model</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">G</mi><mo stretchy="false">(</mo><mi mathvariant="bold">n</mi><mo separator="true">,</mo><mrow><mo stretchy="false">⟨</mo><mi mathvariant="bold">x</mi><mo stretchy="false">⟩</mo></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{G(n, {\langle x \rangle})}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbf">G</span><span class="mopen">(</span><span class="mord mathbf">n</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen">⟨</span><span class="mord mathbf">x</span><span class="mclose">⟩</span></span><span class="mclose">)</span></span></span></span></span>: This model generates a random graph with <code>n</code> nodes and expected values <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⟨</mo><mi>x</mi><mi>i</mi><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle xi \rangle</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⟨</span><span class="mord mathnormal">x</span><span class="mord mathnormal">i</span><span class="mclose">⟩</span></span></span></span>. The probability of each possible graph is proportional to the exponential of a graph statistic (such as the number of edges or triangles) multiplied by a parameter.</p>
+<ol>
+<li>Start with n isolated nodes.</li>
+<li>For each possible edge, calculate the probability of its existence based on the exponential of a graph statistic multiplied by a parameter.</li>
+<li>Add the edge to the graph with the calculated probability.</li>
+</ol>
 </li>
 <li>
 <p><strong>Stochastic Block Model G({C})</strong>: This model generates a random graph with node clusters <code>{C}</code>. Each node belongs to one cluster, and edges between nodes are generated with probabilities that depend on their clusters.</p>
+<ol>
+<li>Partition the set of n nodes into clusters {C}.</li>
+<li>For each pair of nodes, calculate the probability of an edge between them based on their cluster memberships.</li>
+<li>Add the edge to the graph with the calculated probability.</li>
+</ol>
 </li>
 <li>
 <p><strong>Hierarchical Model G(H)</strong>: This model generates a random graph with a given node hierarchy <code>H</code>. The hierarchy is a tree structure, and edges between nodes are more likely if their lowest common ancestor in the hierarchy is closer to them.</p>
+<ol>
+<li>Assign each of the n nodes to a position in the hierarchy H.</li>
+<li>For each pair of nodes, calculate the probability of an edge between them based on their positions in the hierarchy.</li>
+<li>Add the edge to the graph with the calculated probability.</li>
+</ol>
 </li>
 </ul>
 <h3>Core preiphery</h3>

@@ -176,6 +176,9 @@ def remove_node(graph, node_index):
 def connect_nodes(graph, node_index1, node_index2):
     graph.add_edge(node_index1, node_index2)
 
+def neighbors(graph, node_index):
+    return graph.neighbors(node_index)
+
 def disconnect_nodes(graph, node_index1, node_index2):
     edge_id = graph.get_eid(node_index1, node_index2, error=False)
     if edge_id != -1:
