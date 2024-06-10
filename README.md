@@ -96,7 +96,23 @@ Strengths:
 - Adding or removing edges is straightforward and efficient.
 
 
+<h3>Generative models</h3>
+
+<i>(Reasoning network evolution).</i>
+
+Generative models in graphs are algorithms or methods that are used to generate synthetic networks that resemble real-world networks. These models are designed to capture the underlying patterns or structures in the data, and they can be used to create new data that has similar statistical properties to the original data.
+
+- **Forest fire**: This model generates graphs that have a heavy-tailed distribution of in-degrees, out-degrees, and sizes of connected components, which is a common property of many real-world networks. The model starts with a single node and grows the graph by randomly "burning" edges, which is analogous to the spread of a forest fire.
+
+- **Author dynamics**: This model is used to generate co-authorship networks. It assumes that authors are more likely to collaborate with others who have a similar number of previous collaborations. The model starts with a small number of authors and grows the network by adding new authors and collaborations over time.
+
+- **Citation model**: This model is used to generate citation networks, where nodes represent papers and edges represent citations. The model assumes that papers are more likely to cite other papers that have a high number of previous citations. The network grows by adding new papers and citations over time.
+
+- **Butterfly**: This model generates graphs that have a high clustering coefficient and a small average shortest path length, similar to many real-world networks. The model starts with a small number of nodes and grows the network by adding new nodes and edges in a way that maintains the "butterfly" structure.
+
 <h3>Random graphs</h3>
+
+<i>(Reasoning network structure).</i>
 
 **Erdos-Renyi Model**: This is one of the simplest random graph generation models. In the G(n, p) model, a graph is constructed by connecting nodes randomly. Each edge is included in the graph with probability p independent from every other edge. A large "giant" component emarges when $\langle k \rangle = 1$. Random graphs substantially underestimate $\langle C \rangle$.
 
@@ -337,11 +353,61 @@ where:
 
 1. **Edge Betweenness**: This is a measure of centrality and is defined as the number of shortest paths between pairs of nodes that run along it. If an edge has high betweenness then it controls a high amount of flow between nodes.
 
-2. **Edge Closeness**: This is a measure of the mean shortest path length from a given edge to all other edges in the graph. The more central an edge is, the closer it is to all other edges.
+$$\sigma_{ij} = \sum_{st \notin \{i, j\}} \frac{g_{st}^{ij}}{g_{st}}$$
 
-3. **Edge Eigenvector Centrality**: This is a measure of the influence of a node in a network. It assigns relative scores to all nodes in the network based on the concept that connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes.
+2. **PageRank**: This is a ranking algorithm originally used by Google to determine the importance of web pages, based on their incoming links. It can be thought of as a measure of the probability that a random surfer (who randomly clicks on links) will land on a particular page. It's also used in various types of network analysis to measure node importance.
 
-4. **Random Walk Accessibility**: This measure is based on the idea of a random walker traversing the network and uses the probability of reaching each node from a given starting node in a certain number of steps.
+    The PageRank rank \(p\) for node \(i\) in a directed graph \(G\) is defined as follows:
+
+    $$
+    p_i = \alpha \sum_j \frac{A_{ij} p_j}{k_{out_j}} + \frac{1 - \alpha}{n}
+    $$
+
+    Where:
+    - \(\alpha\) is a positive constant, traditionally set to 0.85.
+    - \(A_{ij}\) is the adjacency matrix of the graph, indicating whether there is a link from node \(j\) to node \(i\).
+    - \(p_j\) is the PageRank of node \(j\).
+    - \(k_{out_j}\) is the out-degree of node \(j\), or the number of links going out from node \(j\).
+    - \(n\) is the total number of nodes in the graph.
+
+    In this formula, \(p_i\) represents the probability that a random surfer with teleports lands on node \(i\). The teleporting mechanism (represented by the \(\frac{1 - \alpha}{n}\) term) prevents the random walk from getting stuck in loops or dead ends by allowing the surfer to jump to a random node with a small probability.
+
+3. **Random Walk Accessibility**: This measure is based on the idea of a random walker traversing the network and uses the probability of reaching each node from a given starting node in a certain number of steps. In the context of a directed graph G, the random walk rank w for node t of node i is defined as follows:
+
+    $$
+    w_i = \alpha \sum_j \frac{A_{ij} w_j}{k_{out_j}} + (1 - \alpha)\delta_{it}
+    $$
+
+    Where:
+    - \(\alpha\) is a positive constant, traditionally set to 0.85.
+    - \(A_{ij}\) is the adjacency matrix of the graph, indicating whether there is a link from node j to node i.
+    - \(w_j\) is the random walk rank of node j.
+    - \(k_{out_j}\) is the out-degree of node j, or the number of links going out from node j.
+    - \(\delta_{it}\) is the Kronecker delta, which is 1 if i = t and 0 otherwise.
+
+    In this formula, \(w_i\) represents the probability that a random surfer with teleport t lands on node i.
+
+
+4. **Bridgeness**: This formula calculates the bridgeness of an edge {i, j} as the difference between the total number of shortest paths σ_{ij} and the sum of the ratios of the number of shortest paths through {i, j} to the total number of shortest paths, for all pairs of nodes {s, t} in the union of the neighborhoods of i and j. The second part of the formula calculates the same quantity, but for all pairs of nodes {s, t} not in the union of the neighborhoods of i and j.
+\
+$$
+\sigma_{e_{ij}} = \sigma_{ij} - \sum_{st \in \Gamma_i \cup \Gamma_j} \frac{g_{ij}^{st}}{g_{st}} = \sum_{st \notin \Gamma_i \cup \Gamma_j} \frac{g_{ij}^{st}}{g_{st}}
+$$
+\
+Gammas represent the neighborhoods of both nodes.
+
+5. **Embeddedness**:
+Bridging Embeddedness is a measure used in network analysis to quantify how much a link (or edge) between two nodes is embedded within the network. It's particularly useful for understanding the importance of a link in the context of the overall network structure.
+\
+The formula for calculating the Bridging Embeddedness (θ) of a link {i, j} in an undirected graph G is:
+\
+$$\theta_{ij} = \frac{|\Gamma_i \cap \Gamma_j|}{k_i - 1 + k_j - 1 - |\Gamma_i \cap \Gamma_j|} \\
+\mu-corrected(\theta_{ij}) = \frac{|\Gamma_i \cap \Gamma_j|}{\mu + \max(k_i, k_j) - 1 - |\Gamma_i \cap \Gamma_j|}$$
+\
+where
+    - $\mu$ is the maximum number of triangles over links
+    - $\Gamma_i$ and $\Gamma_j$ are the neighborhoods
+    - $k_i k_j$ are the degrees
 
 
 <h3>Node mixing</h3>
@@ -590,6 +656,38 @@ Network inference refers to the process of predicting or discovering unknown asp
 - **Pearson/Spearman Correlation or AUC Measure**: This framework involves comparing the ideal similarity scores for the unlinked nodes and the removed links. The ideal scores for the unlinked nodes are all zeros, while the ideal scores for the removed links are all ones.
 
 <h3>Machine learning on graphs</h3>
+
+Machine learning on graphs is a subfield of machine learning that focuses on learning from graph data. Graphs provide a natural representation for data in many real-world applications, such as social networks, biological networks, and the World Wide Web. Machine learning tasks on graphs can be broadly categorized into node-level tasks, edge-level tasks, and graph-level tasks.
+
+- **Node-level tasks**: These tasks involve making predictions for individual nodes in the graph. Examples include:
+  - **Node classification**: This involves assigning a label to a node based on its attributes and connections. For example, identifying hoaxes on Wikipedia.
+  - **Node ranking**: This involves ranking nodes based on their importance or influence in the network. For example, finding top influencers on Instagram.
+  - **Network clustering**: This involves grouping similar nodes together. For example, identifying research areas of scientific papers.
+
+- **Edge-level tasks**: These tasks involve making predictions for individual edges in the graph. Examples include:
+  - **Link prediction**: This involves predicting whether a link will form between two nodes. For example, product recommendation on Amazon.
+  - **Strength of ties**: This involves predicting the strength or weight of a connection between two nodes. For example, distinguishing between close friends and acquaintances on Facebook.
+
+- **Graph-level tasks**: These tasks involve making predictions for entire graphs. Examples include:
+  - **Graph classification**: This involves assigning a label to an entire graph based on its structure and the attributes of its nodes and edges. For example, identifying playing strategies in football.
+  - **Graph generation**: This involves generating new graphs that resemble a given set of graphs. This can be used, for example, to generate new social networks or chemical structures.
+
+<hr/>
+<h4>Node Ranking Tasks</h4>
+
+Node ranking tasks involve determining the importance of nodes in a graph. Techniques used include node centrality, link analysis, graphlets, and egonets.
+
+<h4>Link Prediction Tasks</h4>
+
+Link prediction tasks involve predicting the likelihood of a relationship between two nodes. Techniques used include link bridging, prediction indices, and matrix factorization.
+
+<h4>Network Clustering Tasks</h4>
+
+Network clustering tasks involve grouping similar nodes together in a graph. Techniques used include community detection and (stochastic) blockmodeling.
+
+
+<h3>Network visualization</h3>
+
 
 
 

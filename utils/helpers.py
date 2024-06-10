@@ -157,3 +157,8 @@ def disconnect_nodes(graph, node_index1, node_index2):
     edge_id = graph.get_eid(node_index1, node_index2, error=False)
     if edge_id != -1:
         graph.delete_edges(edge_id)
+
+def to_networkx(graph: ig.Graph):
+    networkx_graph = nx.DiGraph() if graph.is_directed() else nx.Graph()
+    networkx_graph.add_edges_from(graph.get_edgelist())
+    return networkx_graph
