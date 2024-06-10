@@ -28,4 +28,9 @@ def top_n_similar_nodes(graph, node, n=10):
     scores = personalized_pagerank(graph, node)
     sorted_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
     sorted_indices.remove(node)
-    return sorted_indices[:n]
+    return sorted_indices[:n], scores
+
+def top_n_betweenness_nodes(G: Graph, n=10):
+    betweenness = betweenness_centrality(G)
+    sorted_indices = sorted(range(len(betweenness)), key=lambda i: betweenness[i], reverse=True)
+    return sorted_indices[:n], betweenness
