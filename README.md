@@ -688,7 +688,11 @@ Network clustering tasks involve grouping similar nodes together in a graph. Tec
 
 <h3>Network visualization</h3>
 
+1. **Circular Layout**: This layout positions nodes in a circle. This can be useful for small graphs and is a simple way to visualize the overall structure of the network. However, it may not be as informative for larger, more complex networks as it does not take into account the relationships between nodes.
 
+2. **Spring Layout (Fruchterman-Reingold)**: This layout is based on the Fruchterman-Reingold algorithm, which treats edges as springs holding nodes apart, and nodes as objects repelling each other. The algorithm iteratively adjusts the positions of the nodes in order to minimize the energy of the system, resulting in a visually pleasing layout that reveals the structure of the network.
+
+3. **Kamada-Kawai Layout**: This layout is based on the Kamada-Kawai algorithm for network drawing. It is a force-directed method, similar to the Spring Layout, but it uses a different energy function. The Kamada-Kawai algorithm aims to position nodes in such a way that the geometric distance between nodes (as displayed in the layout) is as close as possible to the graph-theoretic distance (i.e., the shortest path between nodes in the graph). This often results in layouts that reflect the underlying structure of the network.
 
 
 <h3>Time complexities</h3>

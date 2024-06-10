@@ -971,6 +971,18 @@ s76,-153,76,-153s77,-151,77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,1
 <p>Link prediction tasks involve predicting the likelihood of a relationship between two nodes. Techniques used include link bridging, prediction indices, and matrix factorization.</p>
 <h4>Network Clustering Tasks</h4>
 <p>Network clustering tasks involve grouping similar nodes together in a graph. Techniques used include community detection and (stochastic) blockmodeling.</p>
+<h3>Network visualization</h3>
+<ol>
+<li>
+<p><strong>Circular Layout</strong>: This layout positions nodes in a circle. This can be useful for small graphs and is a simple way to visualize the overall structure of the network. However, it may not be as informative for larger, more complex networks as it does not take into account the relationships between nodes.</p>
+</li>
+<li>
+<p><strong>Spring Layout (Fruchterman-Reingold)</strong>: This layout is based on the Fruchterman-Reingold algorithm, which treats edges as springs holding nodes apart, and nodes as objects repelling each other. The algorithm iteratively adjusts the positions of the nodes in order to minimize the energy of the system, resulting in a visually pleasing layout that reveals the structure of the network.</p>
+</li>
+<li>
+<p><strong>Kamada-Kawai Layout</strong>: This layout is based on the Kamada-Kawai algorithm for network drawing. It is a force-directed method, similar to the Spring Layout, but it uses a different energy function. The Kamada-Kawai algorithm aims to position nodes in such a way that the geometric distance between nodes (as displayed in the layout) is as close as possible to the graph-theoretic distance (i.e., the shortest path between nodes in the graph). This often results in layouts that reflect the underlying structure of the network.</p>
+</li>
+</ol>
 <h3>Time complexities</h3>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> are edges and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> are nodes</p>
 <table>
