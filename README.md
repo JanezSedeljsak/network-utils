@@ -732,3 +732,13 @@ $m$ are edges and $n$ are nodes
 | Graph Isomorphism (General)       | 2^(O((log n)^2))| Determines if two finite graph are isomorphic. |
 
 
+<h3>Network properties</h3>
+
+|                      |   Average Degree |   Max Degree |   Clustering Coefficient |   Number of Vertices |   Number of Edges |   Gamma |   LCC |   Avg. Path Length |
+|:---------------------|-----------------:|-------------:|-------------------------:|---------------------:|------------------:|--------:|------:|-------------------:|
+| Complete             |          299     |          299 |                    1     |                  300 |             44850 |   1.238 | 1     |              1     |
+| Small world          |            8     |           14 |                    0.105 |                  300 |              1200 |   2.753 | 1     |              3.065 |
+| Scale-free gamma=2.5 |            5.96  |           41 |                    0.069 |                  300 |               894 |   2.744 | 1     |              3.09  |
+| Random <k> = 2       |            2.027 |            8 |                    0     |                  300 |               304 |   5.904 | 0.817 |              6.609 |
+| Cycle                |            2     |            2 |                    0     |                  300 |               300 | nan     | 1     |             75.251 |
+| Tree                 |            1.993 |            7 |                    0     |                  300 |               299 |   3.295 | 1     |              5.495 |

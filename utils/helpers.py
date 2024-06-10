@@ -4,6 +4,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
+def info_as_dict(graph, approx_len=False):
+    info_dict = {
+        'Is Directed': graph.is_directed(),
+        'Average Degree': sum(graph.degree()) / len(graph.degree()),
+        'Max Degree': max(graph.degree()),
+        'Clustering Coefficient': graph.transitivity_avglocal_undirected(mode='zero'),
+        'Number of Vertices': graph.vcount(),
+        'Number of Edges': graph.ecount(),
+        'Gamma': calc_gamma(graph.degree()),
+        'Number of Components': len(graph.decompose(mode='strong')),
+        'LCC': max(c.vcount() for c in graph.decompose(mode='strong')) / graph.vcount(),
+        'Number of Pendant Nodes': graph.degree().count(1),
+        'Number of Isolated Nodes': graph.degree().count(0),
+    }
+    if approx_len:
+        info_dict['Approx. Avg. Path Length'] = approximate_avg_path_length(graph)
+    else:
+        info_dict['Avg. Path Length'] = graph.average_path_length()
+    
+    return info_dict
+
 def info(graph, approx_len=False):
     print(f"{'Is Directed:'.ljust(25)} {graph.is_directed()}")
     print(f"{'Average Degree:'.ljust(25)} {sum(graph.degree()) / len(graph.degree())}")
@@ -13,6 +34,8 @@ def info(graph, approx_len=False):
     print(f"{'Number of Edges:'.ljust(25)} {graph.ecount()}")
     print(f"{'Gamma:'.ljust(25)} {calc_gamma(graph.degree())}")
     print(f"{'Number of Components:'.ljust(25)} {len(graph.decompose(mode='strong'))}")
+    print(f"{'Number of Pendant Nodes'.ljust(25)} {graph.degree().count(1)}")
+    print(f"{'Number of Isolated Nodes'.ljust(25)} {graph.degree().count(0)}")
     lcc = (max(c.vcount() for c in graph.decompose(mode='strong')) / graph.vcount())
     print(f"{'LCC:'.ljust(25)} {lcc}")
     if approx_len:
