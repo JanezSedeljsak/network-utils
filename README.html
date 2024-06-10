@@ -678,6 +678,207 @@ s76,-153,76,-153s77,-151,77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,1
 </ul>
 </li>
 </ul>
+<h3>Sampling</h3>
+<p>Network sampling is a crucial aspect of network analysis, especially when dealing with large or hidden populations. It involves selecting a subset of individuals from a network to infer properties of the entire network.</p>
+<p>One common method of network sampling is <b>snowball sampling</b>, often used in sociology. This method involves starting with a small, initial group of individuals and then expanding the sample by including their contacts. This process continues, with the sample 'snowballing' as more and more contacts are included. This method is particularly useful when studying hidden or hard-to-reach populations.</p>
+<p>Another method is <b>contact tracing</b>, which is similar to snowball sampling but focuses on tracking and studying the contacts of individuals within a network. This method is often used in epidemiology to understand the spread of diseases.</p>
+<p>Network sampling also involves understanding the properties of the network, such as its fractality and self-similarity. A fractal network is one where a part of the network is similar to the whole, a property that can help in understanding the network's structure and behavior. Self-similarity, on the other hand, requires the network to exhibit power-law size scaling under renormalization, a property often observed in real-world networks.</p>
+<p>It's important to note that any real network we observe and analyze is just a sample of the true, underlying network. This underscores the importance of effective sampling methods in accurately capturing the properties of the network.</p>
+
+<ul>
+<li>
+<p><strong>Snowball Sampling</strong> is similar to a breadth-first search. In this method, nodes are sampled proportional to their eigenvector centrality.</p>
+</li>
+<li>
+<p><strong>Contact Tracing</strong> is similar to a biased best-first search. In this method, nodes are sampled according to some hidden variable.</p>
+</li>
+<li>
+<p><strong>Respondent-Driven Sampling</strong> is similar to a random walk. In this method, nodes are sampled proportional to their degree.</p>
+</li>
+</ul>
+<p>The average of a property <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> over the sampled nodes can be estimated as:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>x</mi><mo>^</mo></mover><mo>=</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><msub><mi>x</mi><mi>i</mi></msub></mrow><mi>n</mi></mfrac></mrow><annotation encoding="application/x-tex">\hat{x} = \frac{\sum_i x_i}{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.1257em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4397em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>However, this estimate can be biased if the probability of sampling each node is proportional to some property of the node. To correct for this bias, we can use the following estimate:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mover accent="true"><mi>x</mi><mo>^</mo></mover><mtext>corrected</mtext></msub><mo>=</mo><mfrac><mrow><munder><mo>∑</mo><mi>i</mi></munder><mfrac><msub><mi>x</mi><mi>i</mi></msub><msub><mi>k</mi><mi>i</mi></msub></mfrac></mrow><mrow><munder><mo>∑</mo><mi>i</mi></munder><mfrac><mn>1</mn><msub><mi>k</mi><mi>i</mi></msub></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">\hat{x}_{\text{corrected}} = \frac{\sum_i \frac{x_i}{k_i}}{\sum_i \frac{1}{k_i}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2222em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">corrected</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.7653em;vertical-align:-1.1802em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5851em;"><span style="top:-2.2649em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.0315em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4451em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.8351em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.162em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7115em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:-0.0315em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4101em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3281em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4451em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.1802em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+
+<h5>Sampling methods</h5>
+<ul>
+<li>
+<p><strong>Random Selection Methods for Global Network Sparsification</strong></p>
+<ul>
+<li>Random node/link selection with or without induction</li>
+</ul>
+</li>
+<li>
+<p><strong>Network Exploration Methods for Local Network Sampling</strong></p>
+<ul>
+<li>Random walks</li>
+<li>Snowball sampling</li>
+<li>Expansion sampling</li>
+</ul>
+</li>
+<li>
+<p><strong>Merging/Aggregation Methods for Network Simplification</strong></p>
+<ul>
+<li>Box covering</li>
+<li>Cluster growing</li>
+<li>Community aggregation</li>
+</ul>
+</li>
+</ul>
+<h3>Backbones &amp; Skeletons</h3>
+<ul>
+<li>
+<p><strong>Network Backbone</strong>: A technique that retains the most significant links in a network by removing less important ones. It's useful in large networks to focus on the most influential connections.</p>
+</li>
+<li>
+<p><strong>Network Skeleton</strong>: Aims to preserve the network's structure at all scales. Unlike the backbone, it tries to retain as many links as possible, preserving the structure from individual nodes to the entire network. This method is useful when the goal is to preserve the overall structure and characteristics of the network at different scales, from individual nodes (micro) to communities (meso) and the entire network (macro).</p>
+<ul>
+<li>
+<p>Betweenness/Salience Skeletons: Based on betweenness centrality, it identifies and retains the most important edges in the network, forming a simplified representation of the network's structure.</p>
+</li>
+<li>
+<p>Convex Skeleton: The largest subgraph that includes the most influential nodes and all nodes on the shortest paths between them. It forms a 'convex hull' in the network space (tree of cliques, each subraph is convex).</p>
+</li>
+<li>
+<p>Large-Scale Statistics: Involves studying the properties and characteristics of the network skeleton across many nodes and edges, providing insights into the overall structure and behavior of the network.</p>
+</li>
+<li>
+<p>Node Distributions: Refers to the statistical distribution of nodes within the network skeleton, providing insights into its structure and characteristics, such as heterogeneity, connectivity, and robustness.</p>
+</li>
+<li>
+<p>Node Centralities: Measures of a node's importance within the network skeleton, providing insights into which nodes are most influential or critical to the network's structure and function.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><strong>Communities in Skeletons</strong>: Groups of densely connected nodes in the network skeleton, representing functional or structural units. Analyzing these can provide insights into the modular structure of the network.</p>
+</li>
+<li>
+<p><strong>Robustness of Skeletons</strong>: The skeleton's ability to maintain its structure and function when faced with perturbations. Analyzing the robustness can provide insights into the network's resilience and its ability to withstand failures or attacks.</p>
+</li>
+</ul>
+<h3>Inference</h3>
+<p>Network inference refers to the process of predicting or discovering unknown aspects of a network based on known information. This can involve inferring missing, spurious, or hidden nodes and links that may be due to sampling errors, noise, or other factors. The goal is to reconstruct the true network structure or dynamics as accurately as possible. Network inference can be used in various applications, such as:</p>
+<ul>
+<li>
+<p><strong>Predicting Future Links</strong>: One popular application of network inference is predicting future links that are likely to occur. This can be used, for example, to recommend potential friendship ties on social networks like Facebook, based on the existing network of connections.</p>
+</li>
+<li>
+<p><strong>Predicting Product Ratings</strong>: Network inference can also be used to predict product ratings on platforms like Amazon. This can be based on the network of users and their past ratings, using techniques such as collaborative filtering.</p>
+</li>
+<li>
+<p><strong>Predicting Protein Interactions</strong>: In bioinformatics, network inference can be used to predict interactions between proteins. This can be particularly useful when experimental determination of these interactions is costly or difficult.</p>
+</li>
+</ul>
+<hr>
+<h4>Link prediction</h4>
+<ul>
+<li>
+<p><strong>Link Prediction by Local Structure/Dynamics</strong>: For example, if two users on a social network have many mutual friends (a local structure), they are likely to become friends in the future.</p>
+</li>
+<li>
+<p><strong>Link Prediction by Global Structure/Dynamics</strong>: For instance, in a citation network, if two papers are often cited together by other papers (a global structure), it's likely that there is a direct citation link between them.</p>
+</li>
+<li>
+<p><strong>Link Prediction by Maximum Likelihood Methods</strong>: For example, in a protein-protein interaction network, a hierarchical block model might predict that proteins within the same functional group are more likely to interact.</p>
+</li>
+<li>
+<p><strong>Link Prediction by Probabilistic Inference Methods</strong>: For instance, a probabilistic relational model might predict future collaborations between researchers based on their past collaborations and their areas of expertise.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction equivalence</h4>
+<ul>
+<li>
+<p><strong>Common Neighbors Index</strong>: This method predicts links between two nodes (i and j) based on the number of common neighbors they have.</p>
+</li>
+<li>
+<p><strong>Jaccard Neighbors Index</strong>: This method predicts links between two nodes (i and j) based on the similarity of their neighbor sets. It's calculated as the size of the intersection divided by the size of the union of the two sets.</p>
+</li>
+<li>
+<p><strong>Salton Cosine Similarity</strong>: This method predicts links between two nodes (i and j) based on the cosine of the angle between their adjacency vectors. It's a measure of orientation and not magnitude.</p>
+</li>
+<li>
+<p><strong>Leicht Similarity Index</strong>: This method predicts links between two nodes (i and j) based on the ratio of their common neighbors to the product of their degrees.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction overlap</h4>
+<ul>
+<li>
+<p><strong>Sørensen Neighbors Index</strong>: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the average degree of the two nodes.</p>
+</li>
+<li>
+<p><strong>Hub Promoted Index</strong>: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the degree of the node with fewer connections (the "hub").</p>
+</li>
+<li>
+<p><strong>Hub Depressed Index</strong>: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the degree of the node with more connections.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction models</h4>
+<ul>
+<li>
+<p><strong>Configuration Model Index</strong>: This method predicts links between two nodes (i and j) based on the ratio of their common neighbors to the product of their degrees, normalized by the total number of nodes. It's a model that generates a random graph with a given degree sequence.</p>
+</li>
+<li>
+<p><strong>Preferential Attachment Index</strong>: This method predicts links between two nodes (i and j) based on the product of their degrees. It's based on the principle that the more connected a node is, the more likely it is to receive new links.</p>
+</li>
+<li>
+<p><strong>Random Graph Index</strong>: This method predicts links between two nodes (i and j) based on the degree of one node, normalized by the total number of nodes minus one. It's a model that generates a graph of n nodes, each pair of nodes being connected with equal probability.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction dynamics</h4>
+<ul>
+<li>
+<p><strong>Resource Allocation Index</strong>: This method predicts links between two nodes (i and j) based on the sum of the reciprocal of the degree of their common neighbors. It's a measure that considers the resources that can be transferred through common neighbors.</p>
+</li>
+<li>
+<p><strong>Adamic-Adar Similarity Index</strong>: This method predicts links between two nodes (i and j) based on the sum of the reciprocal of the logarithm of the degree of their common neighbors. It gives more weight to uncommon features.</p>
+</li>
+<li>
+<p><strong>Random Walk Similarity Index</strong>: This method predicts links between two nodes (i and j) based on the probability that a random walk starting from node i will end at node j, and vice versa. It's a measure that considers the structure of the entire network.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction clusters</h4>
+<ul>
+<li>
+<p><strong>Community Structure Index</strong>: This method predicts links between two nodes (i and j) based on the number of links within their community, normalized by the total possible number of links within the community, if they belong to the same community. It's a measure that considers the community structure of the network.</p>
+</li>
+<li>
+<p><strong>Block Model Index</strong>: This method predicts links between two nodes (i and j) based on the number of links within their community, normalized by the total possible number of links within the community, if they belong to the same community. If they belong to different communities, it's based on the number of links between their communities, normalized by the product of the sizes of their communities. It's a measure that considers the block structure of the network.</p>
+</li>
+</ul>
+<hr>
+<h4>Prediction framework</h4>
+<ul>
+<li>
+<p><strong>Standard Link Prediction Setting</strong>: This framework involves three steps:</p>
+<ol>
+<li>Randomly sample a set of unlinked nodes.</li>
+<li>Remove a random set of node links.</li>
+<li>Compute the similarity score for the union of the unlinked nodes and the removed links on the resulting network.</li>
+</ol>
+</li>
+<li>
+<p><strong>Temporal Link Prediction Setting</strong>: This framework involves three steps:</p>
+<ol>
+<li>Randomly sample a set of unlinked nodes equal to the size of the removed links.</li>
+<li>Remove node links after a certain time t.</li>
+<li>Compute the similarity score for the union of the unlinked nodes and the removed links on the network at time t.</li>
+</ol>
+</li>
+<li>
+<p><strong>Pearson/Spearman Correlation or AUC Measure</strong>: This framework involves comparing the ideal similarity scores for the unlinked nodes and the removed links. The ideal scores for the unlinked nodes are all zeros, while the ideal scores for the removed links are all ones.</p>
+</li>
+</ul>
+<h3>Machine learning on graphs</h3>
 <h3>Time complexities</h3>
 <p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> are edges and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> are nodes</p>
 <table>
@@ -685,72 +886,119 @@ s76,-153,76,-153s77,-151,77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,1
 <tr>
 <th>Measure/Algorithm</th>
 <th>Time Complexity</th>
+<th>Method</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Clustering Coefficient</td>
 <td>O(n^2)</td>
+<td>Measures the degree to which nodes in a graph tend to cluster together.</td>
 </tr>
 <tr>
 <td>Average Distance</td>
 <td>O(n^3)</td>
+<td>Calculates the average distance between every pair of nodes in the graph.</td>
 </tr>
 <tr>
 <td>Approximated Average Distance</td>
 <td>O(n log n)</td>
+<td>Approximates the average distance between nodes in a graph.</td>
 </tr>
 <tr>
 <td>Diameter</td>
 <td>O(n^3)</td>
+<td>Finds the longest shortest path between any two nodes in the graph.</td>
 </tr>
 <tr>
 <td>Gamma (Transitivity)</td>
 <td>O(n^2)</td>
+<td>Measures the likelihood that the adjacent vertices of a vertex are connected.</td>
 </tr>
 <tr>
 <td>Finding the Largest Connected Component</td>
 <td>O(n + m)</td>
+<td>Finds the largest subgraph in which any two vertices are connected to each other.</td>
 </tr>
 <tr>
 <td>Page Rank</td>
 <td>O(n log n)</td>
+<td>Measures the importance of each node in the network, based on the structure of incoming links.</td>
 </tr>
 <tr>
 <td>Betweenness Centrality</td>
 <td>O(n^3)</td>
+<td>Measures the extent to which a node lies on paths between other nodes.</td>
 </tr>
 <tr>
 <td>Louvain Community Detection</td>
 <td>O(n log n)</td>
+<td>Detects communities in large networks.</td>
 </tr>
 <tr>
 <td>Infomap</td>
 <td>O(n log n)</td>
+<td>Detects community structure in complex networks.</td>
 </tr>
 <tr>
 <td>Girvan-Newman</td>
 <td>O(n^3)</td>
+<td>Detects communities by progressively removing edges from the original graph.</td>
 </tr>
 <tr>
 <td>Breadth-First Search (BFS)</td>
 <td>O(n + m)</td>
+<td>Traverses the graph in a breadthward motion and uses a queue to remember to get the next vertex to start a search when a dead end occurs in any iteration.</td>
 </tr>
 <tr>
 <td>Depth-First Search (DFS)</td>
 <td>O(n + m)</td>
+<td>Traverses the graph in a depthward motion and uses a stack to remember to get the next vertex to start a search when a dead end occurs in any iteration.</td>
 </tr>
 <tr>
 <td>Dijkstra's Algorithm</td>
 <td>O((n + m) log n)</td>
+<td>Finds the shortest path from a node to all other nodes in the graph.</td>
 </tr>
 <tr>
 <td>Bellman-Ford Algorithm</td>
 <td>O(n * m)</td>
+<td>Computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph.</td>
 </tr>
 <tr>
 <td>Kruskal's Algorithm</td>
 <td>O(m log m)</td>
+<td>Finds a minimum spanning forest of an undirected edge-weighted graph.</td>
+</tr>
+<tr>
+<td>Floyd-Warshall Algorithm</td>
+<td>O(n^3)</td>
+<td>Finds shortest paths in a weighted graph with positive or negative edge weights (but with no negative cycles).</td>
+</tr>
+<tr>
+<td>Prim's Algorithm</td>
+<td>O(n^2)</td>
+<td>Finds a minimum spanning tree for a weighted undirected graph.</td>
+</tr>
+<tr>
+<td>Edmonds-Karp Algorithm</td>
+<td>O(n * m^2)</td>
+<td>Implements the Ford-Fulkerson method for computing the maximum flow in a flow network.</td>
+</tr>
+<tr>
+<td>Ford-Fulkerson Algorithm</td>
+<td>O(max_flow * m)</td>
+<td>Computes the maximum flow in a flow network.</td>
+</tr>
+<tr>
+<td>Johnson's Algorithm</td>
+<td>O(n^2 log n + n * m)</td>
+<td>Finds the shortest paths between all pairs of vertices in a sparse, edge-weighted, directed graph.</td>
+</tr>
+<tr>
+<td>Graph Isomorphism (General)</td>
+<td>2^(O((log n)^2))</td>
+<td>Determines if two finite graph are isomorphic.</td>
 </tr>
 </tbody>
 </table>

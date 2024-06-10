@@ -429,27 +429,197 @@ Graphlets are small subgraphs of a larger network, and orbits are essentially th
     -  arithmetic/geometric graphlet agreeement $A$ is defind as $$A = \frac{1}{73} \sum_i A_i \\ 
         A = (\prod_i A_i)^{\frac{1}{73}}
     $$
+
+<h3>Sampling</h3>
+
+Network sampling is a crucial aspect of network analysis, especially when dealing with large or hidden populations. It involves selecting a subset of individuals from a network to infer properties of the entire network.
+
+One common method of network sampling is <b>snowball sampling</b>, often used in sociology. This method involves starting with a small, initial group of individuals and then expanding the sample by including their contacts. This process continues, with the sample 'snowballing' as more and more contacts are included. This method is particularly useful when studying hidden or hard-to-reach populations.
+
+Another method is <b>contact tracing</b>, which is similar to snowball sampling but focuses on tracking and studying the contacts of individuals within a network. This method is often used in epidemiology to understand the spread of diseases.
+
+Network sampling also involves understanding the properties of the network, such as its fractality and self-similarity. A fractal network is one where a part of the network is similar to the whole, a property that can help in understanding the network's structure and behavior. Self-similarity, on the other hand, requires the network to exhibit power-law size scaling under renormalization, a property often observed in real-world networks.
+
+It's important to note that any real network we observe and analyze is just a sample of the true, underlying network. This underscores the importance of effective sampling methods in accurately capturing the properties of the network.
+
+</hr>
+
+- **Snowball Sampling** is similar to a breadth-first search. In this method, nodes are sampled proportional to their eigenvector centrality. 
+
+- **Contact Tracing** is similar to a biased best-first search. In this method, nodes are sampled according to some hidden variable.
+
+- **Respondent-Driven Sampling** is similar to a random walk. In this method, nodes are sampled proportional to their degree.
+
+The average of a property $x_i$ over the sampled nodes can be estimated as:
+
+$$
+\hat{x} = \frac{\sum_i x_i}{n}
+$$
+
+However, this estimate can be biased if the probability of sampling each node is proportional to some property of the node. To correct for this bias, we can use the following estimate:
+
+$$
+\hat{x}_{\text{corrected}} = \frac{\sum_i \frac{x_i}{k_i}}{\sum_i \frac{1}{k_i}}
+$$
+
+</hr>
+
+<h5>Sampling methods</h5>
+
+- **Random Selection Methods for Global Network Sparsification**
+  - Random node/link selection with or without induction
+
+- **Network Exploration Methods for Local Network Sampling**
+  - Random walks
+  - Snowball sampling
+  - Expansion sampling
+
+- **Merging/Aggregation Methods for Network Simplification**
+  - Box covering
+  - Cluster growing
+  - Community aggregation
+
+
+<h3>Backbones & Skeletons</h3>
+
+- **Network Backbone**: A technique that retains the most significant links in a network by removing less important ones. It's useful in large networks to focus on the most influential connections.
+
+- **Network Skeleton**: Aims to preserve the network's structure at all scales. Unlike the backbone, it tries to retain as many links as possible, preserving the structure from individual nodes to the entire network. This method is useful when the goal is to preserve the overall structure and characteristics of the network at different scales, from individual nodes (micro) to communities (meso) and the entire network (macro).
+
+    - Betweenness/Salience Skeletons: Based on betweenness centrality, it identifies and retains the most important edges in the network, forming a simplified representation of the network's structure.
+
+    - Convex Skeleton: The largest subgraph that includes the most influential nodes and all nodes on the shortest paths between them. It forms a 'convex hull' in the network space (tree of cliques, each subraph is convex).
+
+    - Large-Scale Statistics: Involves studying the properties and characteristics of the network skeleton across many nodes and edges, providing insights into the overall structure and behavior of the network.
+
+    - Node Distributions: Refers to the statistical distribution of nodes within the network skeleton, providing insights into its structure and characteristics, such as heterogeneity, connectivity, and robustness.
+
+    - Node Centralities: Measures of a node's importance within the network skeleton, providing insights into which nodes are most influential or critical to the network's structure and function.
+
+<hr/>
+
+- **Communities in Skeletons**: Groups of densely connected nodes in the network skeleton, representing functional or structural units. Analyzing these can provide insights into the modular structure of the network.
+
+- **Robustness of Skeletons**: The skeleton's ability to maintain its structure and function when faced with perturbations. Analyzing the robustness can provide insights into the network's resilience and its ability to withstand failures or attacks.
+
+
+<h3>Inference</h3>
+
+Network inference refers to the process of predicting or discovering unknown aspects of a network based on known information. This can involve inferring missing, spurious, or hidden nodes and links that may be due to sampling errors, noise, or other factors. The goal is to reconstruct the true network structure or dynamics as accurately as possible. Network inference can be used in various applications, such as:
+
+- **Predicting Future Links**: One popular application of network inference is predicting future links that are likely to occur. This can be used, for example, to recommend potential friendship ties on social networks like Facebook, based on the existing network of connections.
+
+- **Predicting Product Ratings**: Network inference can also be used to predict product ratings on platforms like Amazon. This can be based on the network of users and their past ratings, using techniques such as collaborative filtering.
+
+- **Predicting Protein Interactions**: In bioinformatics, network inference can be used to predict interactions between proteins. This can be particularly useful when experimental determination of these interactions is costly or difficult.
+
+<hr/>
+
+<h4>Link prediction</h4>
+
+- **Link Prediction by Local Structure/Dynamics**: For example, if two users on a social network have many mutual friends (a local structure), they are likely to become friends in the future.
+
+- **Link Prediction by Global Structure/Dynamics**: For instance, in a citation network, if two papers are often cited together by other papers (a global structure), it's likely that there is a direct citation link between them.
+
+- **Link Prediction by Maximum Likelihood Methods**: For example, in a protein-protein interaction network, a hierarchical block model might predict that proteins within the same functional group are more likely to interact.
+
+- **Link Prediction by Probabilistic Inference Methods**: For instance, a probabilistic relational model might predict future collaborations between researchers based on their past collaborations and their areas of expertise.
+
+<hr/>
+
+<h4>Prediction equivalence</h4>
+
+- **Common Neighbors Index**: This method predicts links between two nodes (i and j) based on the number of common neighbors they have.
+
+- **Jaccard Neighbors Index**: This method predicts links between two nodes (i and j) based on the similarity of their neighbor sets. It's calculated as the size of the intersection divided by the size of the union of the two sets.
+
+- **Salton Cosine Similarity**: This method predicts links between two nodes (i and j) based on the cosine of the angle between their adjacency vectors. It's a measure of orientation and not magnitude.
+
+- **Leicht Similarity Index**: This method predicts links between two nodes (i and j) based on the ratio of their common neighbors to the product of their degrees. 
+
+
+<hr/>
+
+<h4>Prediction overlap</h4>
+
+- **Sørensen Neighbors Index**: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the average degree of the two nodes.
+
+- **Hub Promoted Index**: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the degree of the node with fewer connections (the "hub").
+
+- **Hub Depressed Index**: This method predicts links between two nodes (i and j) based on the size of the intersection of their neighbor sets, normalized by the degree of the node with more connections.
+
+<hr/>
+
+<h4>Prediction models</h4>
+
+- **Configuration Model Index**: This method predicts links between two nodes (i and j) based on the ratio of their common neighbors to the product of their degrees, normalized by the total number of nodes. It's a model that generates a random graph with a given degree sequence.
+
+- **Preferential Attachment Index**: This method predicts links between two nodes (i and j) based on the product of their degrees. It's based on the principle that the more connected a node is, the more likely it is to receive new links.
+
+- **Random Graph Index**: This method predicts links between two nodes (i and j) based on the degree of one node, normalized by the total number of nodes minus one. It's a model that generates a graph of n nodes, each pair of nodes being connected with equal probability.
+
+<hr/>
+<h4>Prediction dynamics</h4>
+
+- **Resource Allocation Index**: This method predicts links between two nodes (i and j) based on the sum of the reciprocal of the degree of their common neighbors. It's a measure that considers the resources that can be transferred through common neighbors.
+
+- **Adamic-Adar Similarity Index**: This method predicts links between two nodes (i and j) based on the sum of the reciprocal of the logarithm of the degree of their common neighbors. It gives more weight to uncommon features.
+
+- **Random Walk Similarity Index**: This method predicts links between two nodes (i and j) based on the probability that a random walk starting from node i will end at node j, and vice versa. It's a measure that considers the structure of the entire network.
+
+<hr/>
+<h4>Prediction clusters</h4>
+
+- **Community Structure Index**: This method predicts links between two nodes (i and j) based on the number of links within their community, normalized by the total possible number of links within the community, if they belong to the same community. It's a measure that considers the community structure of the network.
+
+- **Block Model Index**: This method predicts links between two nodes (i and j) based on the number of links within their community, normalized by the total possible number of links within the community, if they belong to the same community. If they belong to different communities, it's based on the number of links between their communities, normalized by the product of the sizes of their communities. It's a measure that considers the block structure of the network.
+
+<hr/>
+<h4>Prediction framework</h4>
+
+- **Standard Link Prediction Setting**: This framework involves three steps:
+  1. Randomly sample a set of unlinked nodes.
+  2. Remove a random set of node links.
+  3. Compute the similarity score for the union of the unlinked nodes and the removed links on the resulting network.
+
+- **Temporal Link Prediction Setting**: This framework involves three steps:
+  1. Randomly sample a set of unlinked nodes equal to the size of the removed links.
+  2. Remove node links after a certain time t.
+  3. Compute the similarity score for the union of the unlinked nodes and the removed links on the network at time t.
+
+- **Pearson/Spearman Correlation or AUC Measure**: This framework involves comparing the ideal similarity scores for the unlinked nodes and the removed links. The ideal scores for the unlinked nodes are all zeros, while the ideal scores for the removed links are all ones.
+
+<h3>Machine learning on graphs</h3>
+
+
+
 <h3>Time complexities</h3>
 
 $m$ are edges and $n$ are nodes
 
-| Measure/Algorithm                  | Time Complexity |
-|-----------------------------------|-----------------|
-| Clustering Coefficient            | O(n^2)          |
-| Average Distance                  | O(n^3)          |
-| Approximated Average Distance     | O(n log n)      |
-| Diameter                          | O(n^3)          |
-| Gamma (Transitivity)              | O(n^2)          |
-| Finding the Largest Connected Component | O(n + m)    |
-| Page Rank                         | O(n log n)      |
-| Betweenness Centrality            | O(n^3)          |
-| Louvain Community Detection       | O(n log n)      |
-| Infomap                           | O(n log n)      |
-| Girvan-Newman                     | O(n^3)          |
-| Breadth-First Search (BFS)        | O(n + m)        |
-| Depth-First Search (DFS)          | O(n + m)        |
-| Dijkstra's Algorithm              | O((n + m) log n)|
-| Bellman-Ford Algorithm            | O(n * m)        |
-| Kruskal's Algorithm               | O(m log m)      |
+| Measure/Algorithm                  | Time Complexity | Method |
+|-----------------------------------|-----------------|--------|
+| Clustering Coefficient            | O(n^2)          | Measures the degree to which nodes in a graph tend to cluster together. |
+| Average Distance                  | O(n^3)          | Calculates the average distance between every pair of nodes in the graph. |
+| Approximated Average Distance     | O(n log n)      | Approximates the average distance between nodes in a graph. |
+| Diameter                          | O(n^3)          | Finds the longest shortest path between any two nodes in the graph. |
+| Gamma (Transitivity)              | O(n^2)          | Measures the likelihood that the adjacent vertices of a vertex are connected. |
+| Finding the Largest Connected Component | O(n + m)    | Finds the largest subgraph in which any two vertices are connected to each other. |
+| Page Rank                         | O(n log n)      | Measures the importance of each node in the network, based on the structure of incoming links. |
+| Betweenness Centrality            | O(n^3)          | Measures the extent to which a node lies on paths between other nodes. |
+| Louvain Community Detection       | O(n log n)      | Detects communities in large networks. |
+| Infomap                           | O(n log n)      | Detects community structure in complex networks. |
+| Girvan-Newman                     | O(n^3)          | Detects communities by progressively removing edges from the original graph. |
+| Breadth-First Search (BFS)        | O(n + m)        | Traverses the graph in a breadthward motion and uses a queue to remember to get the next vertex to start a search when a dead end occurs in any iteration. |
+| Depth-First Search (DFS)          | O(n + m)        | Traverses the graph in a depthward motion and uses a stack to remember to get the next vertex to start a search when a dead end occurs in any iteration. |
+| Dijkstra's Algorithm              | O((n + m) log n)| Finds the shortest path from a node to all other nodes in the graph. |
+| Bellman-Ford Algorithm            | O(n * m)        | Computes shortest paths from a single source vertex to all of the other vertices in a weighted digraph. |
+| Kruskal's Algorithm               | O(m log m)      | Finds a minimum spanning forest of an undirected edge-weighted graph. |
+| Floyd-Warshall Algorithm          | O(n^3)          | Finds shortest paths in a weighted graph with positive or negative edge weights (but with no negative cycles). |
+| Prim's Algorithm                  | O(n^2)          | Finds a minimum spanning tree for a weighted undirected graph. |
+| Edmonds-Karp Algorithm            | O(n * m^2)      | Implements the Ford-Fulkerson method for computing the maximum flow in a flow network. |
+| Ford-Fulkerson Algorithm          | O(max_flow * m) | Computes the maximum flow in a flow network. |
+| Johnson's Algorithm               | O(n^2 log n + n * m) | Finds the shortest paths between all pairs of vertices in a sparse, edge-weighted, directed graph. |
+| Graph Isomorphism (General)       | 2^(O((log n)^2))| Determines if two finite graph are isomorphic. |
 
 

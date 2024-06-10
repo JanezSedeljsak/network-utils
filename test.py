@@ -96,6 +96,11 @@ def test_disconnect_nodes():
     disconnect_nodes(graph, 0, 1)
     assert not nodes_are_connected(graph, 0, 1), "Nodes 0 and 1 should not be connected"
 
+def test_standard_link_prediction():
+    graph = ig.Graph.Erdos_Renyi(n=100, p=0.2)
+    score = standard_link_prediction(graph, 5)
+    assert 0 <= score <= 1, "All similarity scores should be between 0 and 1"
+
 if __name__ == '__main__':
     test_motifs()
     test_graphlet()
@@ -110,3 +115,4 @@ if __name__ == '__main__':
     test_remove_node()
     test_connect_nodes()
     test_disconnect_nodes()
+    test_standard_link_prediction()

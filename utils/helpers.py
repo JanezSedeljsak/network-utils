@@ -71,6 +71,24 @@ def approximate_avg_path_length(graph):
     
     return -1
 
+def standard_link_prediction(graph, num_samples):
+    # randomly sample a set of unlinked node pairs
+    unlinked_node_pairs = [(node1, node2) for node1 in graph.vs for node2 in graph.vs if node1.index != node2.index and not graph.are_connected(node1, node2)]
+    sampled_node_pairs = random.sample(unlinked_node_pairs, min(num_samples, len(unlinked_node_pairs)))
+
+    # remove a random set of node links
+    edges = [edge for edge in graph.es]
+    removed_edges = random.sample(edges, min(num_samples, len(edges)))
+    graph.delete_edges(removed_edges)
+
+    similarity_scores = []
+    for node1, node2 in sampled_node_pairs:
+        for edge in removed_edges:
+            scores = graph.similarity_jaccard(pairs=[(node1.index, edge.source), (node1.index, edge.target), (node2.index, edge.source), (node2.index, edge.target)])
+            similarity_scores.append(sum(scores) / len(scores))
+
+    return np.mean(similarity_scores)
+
 
 def calc_gamma(degs, k_min=5):
     degs = np.array(degs)
