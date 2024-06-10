@@ -14,7 +14,8 @@ def generate_configuration_model(degree_sequence=[2, 3, 1, 1, 1, 2, 1, 1, 1, 1])
 
 def stochastic_block_model(n=300, p_matrix=[[0.5, 0.1], [0.1, 0.5]]):
     blocks = [n // 2, n // 2]
-    sbm_graph = ig.Graph.SBM(n=blocks, pref_matrix=p_matrix)
+    p_matrix = np.array(p_matrix)
+    sbm_graph = ig.Graph.SBM(n, p_matrix, blocks)
     return sbm_graph
 
 def price(n=300, m=3):
@@ -24,12 +25,12 @@ def price(n=300, m=3):
 def generate_hierarchical_model(n=10, children=3):
     return ig.Graph.Tree(n=n, children=children)
 
-def generate_stochastic_block_model(sizes=[10, 10, 10], probs=[[0.8, 0.1, 0.1], [0.1, 0.8, 0.1], [0.1, 0.1, 0.8]]):
-    n = sum(sizes)
-    labels = np.hstack([[i]*size for i, size in enumerate(sizes)])
-    edges = []
-    for i in range(n):
-        for j in range(i+1, n):
-            if np.random.rand() < probs[labels[i], labels[j]]:
-                edges.append((i, j))
-    return ig.Graph(n=n, edges=edges)
+# def generate_stochastic_block_model(sizes=[10, 10, 10], probs=[[0.8, 0.1, 0.1], [0.1, 0.8, 0.1], [0.1, 0.1, 0.8]]):
+#     n = sum(sizes)
+#     labels = np.hstack([[i]*size for i, size in enumerate(sizes)])
+#     edges = []
+#     for i in range(n):
+#         for j in range(i+1, n):
+#             if np.random.rand() < probs[labels[i], labels[j]]:
+#                 edges.append((i, j))
+#     return ig.Graph(n=n, edges=edges)

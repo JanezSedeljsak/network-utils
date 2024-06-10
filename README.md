@@ -313,7 +313,9 @@ $$e_i = \frac{1}{\lambda} \sum_{j} A_{ij} e_j$$
 5. **PageRank**: This is a variant of Eigenvector Centrality, used by Google to rank websites in their search engine results. It measures the importance of each node within the network.
 $$p_i = \alpha + \sum_j (A_{ij} \frac{p_j}{k_j^{out}}) + \beta_i$$,
 for convenience $\beta_i = \frac{1 - \alpha}{n}$ (teleportation probability) and $\alpha = 0.85$ (damping factor). $k_j^{out}$ is the out-degree of node $j$, which is the number of links going out from the node. $p_j$ is the <b>PageRank</b> of node $j$. The nature of PageRank is thus recursive and is calculate iteratively slowly adjusting the PageRank of every node.
-
+\
+In this formula, d is the damping factor, which represents the probability of continuing the random walk to a randomly chosen neighbor. $1 - d$ is the probability of "jumping" back to the restart node. The restart node is represented by $β_i$, which is a vector where all elements are 0 except for the element corresponding to the restart node, which is 1. $A_{ij}$ is the adjacency matrix of the graph, p_j is the PageRank of node j, and $k_j^{out}$ is the out-degree of node j.
+$$p_i = (1 - d) \cdot \beta_i + d \cdot \sum_j (A_{ij} \frac{p_j}{k_j^{out}})$$
 6. **Katz Centrality**: This measure assigns relative scores to all nodes in the network based on the sum of the number of walks of different lengths, with shorter walks contributing more than longer ones. It is similar to Eigenvector Centrality but it also considers the shorter paths.
 $$k_i = \alpha \sum_{j} A_{ij} k_j + \beta$$
 where:
@@ -734,11 +736,13 @@ $m$ are edges and $n$ are nodes
 
 <h3>Network properties</h3>
 
-|                      |   Average Degree |   Max Degree |   Clustering Coefficient |   Number of Vertices |   Number of Edges |   Gamma |   LCC |   Avg. Path Length |
-|:---------------------|-----------------:|-------------:|-------------------------:|---------------------:|------------------:|--------:|------:|-------------------:|
-| Complete             |          299     |          299 |                    1     |                  300 |             44850 |   1.238 | 1     |              1     |
-| Small world          |            8     |           14 |                    0.105 |                  300 |              1200 |   2.753 | 1     |              3.065 |
-| Scale-free gamma=2.5 |            5.96  |           41 |                    0.069 |                  300 |               894 |   2.744 | 1     |              3.09  |
-| Random <k> = 2       |            2.027 |            8 |                    0     |                  300 |               304 |   5.904 | 0.817 |              6.609 |
-| Cycle                |            2     |            2 |                    0     |                  300 |               300 | nan     | 1     |             75.251 |
-| Tree                 |            1.993 |            7 |                    0     |                  300 |               299 |   3.295 | 1     |              5.495 |
+|                              |   Average Degree |   Max Degree |   Clustering Coefficient |   Number of Vertices |   Number of Edges |   Gamma |   LCC |   Avg. Path Length |
+|:-----------------------------|-----------------:|-------------:|-------------------------:|---------------------:|------------------:|--------:|------:|-------------------:|
+| Complete                     |          299     |          299 |                    1     |                  300 |             44850 |   1.238 |  1    |              1     |
+| Stochaistic block model      |           88.773 |          105 |                    0.389 |                  300 |             13316 |   1.336 |  1    |              1.703 |
+| Configuration model          |           10     |           10 |                    0.028 |                  300 |              1500 |   2.252 |  1    |              2.733 |
+| Small world (wattz)          |            8     |           13 |                    0.088 |                  300 |              1200 |   2.745 |  1    |              3.045 |
+| Scale-free gamma=2.5 (price) |            5.96  |           55 |                    0.075 |                  300 |               894 |   2.764 |  1    |              3.071 |
+| Random <k> = 2               |            2.1   |            8 |                    0.01  |                  300 |               315 |   6.193 |  0.81 |              6.662 |
+| Cycle                        |            2     |            2 |                    0     |                  300 |               300 | nan     |  1    |             75.251 |
+| Tree                         |            1.993 |            7 |                    0     |                  300 |               299 |   3.295 |  1    |              5.495 |
