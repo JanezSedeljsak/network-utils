@@ -15,6 +15,12 @@ def eigenvector_centrality(G: Graph):
 def pagerank(G: Graph):
     return G.pagerank()
 
+def mu_corrected_clustering(graph):
+    local_cc = graph.transitivity_local_undirected(mode="zero")
+    degrees = graph.degree()
+    mu_corrected_cc = [cc / (degree if degree > 1 else 1) for cc, degree in zip(local_cc, degrees)]
+    return mu_corrected_cc
+
 def personalized_pagerank(graph, node, damping_factor=0.85):
     # Create a vector for the restart distribution
     restart_distribution = [0] * len(graph.vs)
